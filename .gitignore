@@ -1,0 +1,33 @@
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Build outputs .NET
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# NuGet
+*.nupkg
+packages/
+
+# Ficheiros de base de dados locais (LocalDB, etc.)
+*.mdf
+*.ldf
+*.ndf
+
+# Configuração com dados sensíveis (connection strings, credenciais)
+appsettings.json
+appsettings.*.json
+!appsettings.Example.json
+secrets.json
+
+# Logs e temporários
+*.log
+*.bak
