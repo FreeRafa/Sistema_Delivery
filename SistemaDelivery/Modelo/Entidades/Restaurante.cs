@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SistemaDelivery.Modelo.Entidades
+{
+    public class Restaurante
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Nipc { get; set; } = string.Empty;
+        public string Telemovel { get; set; } = string.Empty;
+        public string Categoria {  get; set; } = string.Empty;
+        public bool Ativo {  get; set; }
+    }
+}

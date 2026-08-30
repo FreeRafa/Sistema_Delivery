@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SistemaDelivery.Modelo.Entidades;
 
 namespace SistemaDelivery.Infrastructure.Data
 {
@@ -11,9 +12,9 @@ namespace SistemaDelivery.Infrastructure.Data
         {
         }
 
-        public DbSet<Cliente> Clientes => Set<Clientes>();
-        public DbSet<Restaurante> Restaurantes => Set<Restaurantes>();
-        public DbSet<Prato> Pratos => Set<Pratos>();
+        public DbSet<Cliente> Clientes => Set<Cliente>();
+        public DbSet<Restaurante> Restaurantes => Set<Restaurante>();
+        public DbSet<Prato> Pratos => Set<Prato>();
         public DbSet<Pedido> Pedidos => Set<Pedido>();
         public DbSet<ItemPedido> ItemsPedidos => Set<ItemPedido>();
 
