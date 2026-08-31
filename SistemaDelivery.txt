@@ -1,0 +1,15 @@
+SistemaDelivery/
+├── Modelo/
+│   ├── Entidades/         (5 arquivos — já ajustados)
+│   ├── Enums/              StatusPedido.cs, CategoriaRestaurante.cs
+│   └── Interfaces/         IRepositorioBase + 1 por entidade (5)
+├── Infrastructure/
+│   ├── Data/Configurations/  RestauranteConfiguration.cs
+│   └── Repositorios/          RepositorioBase + 1 por entidade (5)
+├── Servico/
+│   ├── Interfaces/            4 interfaces (Cliente, Restaurante, Prato, Pedido)
+│   └── *.cs                   4 implementações
+├── Menus/
+│   ├── IMenu.cs, MenuCliente.cs, MenuPrincipal.cs
+│   └── Utils/ConsoleHelper.cs
+└── Program.cs.exemplo         (renomeia para Program.cs quando integrares)
