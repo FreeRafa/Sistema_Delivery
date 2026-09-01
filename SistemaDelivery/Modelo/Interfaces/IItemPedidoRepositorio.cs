@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaDelivery.Modelo.Interfaces
 {
-    public interface IItemPedido
+    public interface IItemPedidoRepositorio
     {
         Task<ItemPedido> ObterPorIdAsync(int id);
         Task<ItemPedido> AdicionarItemPedidoAsync(ItemPedido itemPedido);

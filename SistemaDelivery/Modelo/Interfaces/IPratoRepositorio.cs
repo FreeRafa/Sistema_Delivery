@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaDelivery.Modelo.Interfaces
 {
-    public interface IPrato
+    public interface IPratoRepositorio
     {
         Task<Prato> ObterPorIdAsync(int id);
         Task<Prato> AdicionarPratoAsync(Prato prato);

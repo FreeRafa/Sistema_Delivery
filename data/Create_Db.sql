@@ -8,7 +8,7 @@ CREATE TABLE Restaurante
     Nome NVARCHAR(250) NOT NULL UNIQUE,
     Nipc NVARCHAR(20) NOT NULL UNIQUE,
     Telemovel NVARCHAR(50) NOT NULL,
-    Categoria NVARCHAR(50) NOT NULL CHECK (Categoria IN ('Fast-Food', 'Casual', 'Alta Gastronomia', 'Temáticos', 'Regional')),
+    Categoria NVARCHAR(50) NOT NULL CHECK (Categoria IN ('FastFood', 'Casual', 'AltaGastronomia', 'Tematicos', 'Regional')),
     Ativo BIT NOT NULL DEFAULT 1
 );
 
