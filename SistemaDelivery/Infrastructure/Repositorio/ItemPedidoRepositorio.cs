@@ -15,34 +15,34 @@ namespace SistemaDelivery.Infrastructure.Repositorio
         }
         public async Task<ItemPedido> ObterPorIdAsync(int id)
         {
-            return await _context.ItemPedido.FindAsync(id);
+            return await _context.ItensPedido.FindAsync(id);
         }
         public async Task<ItemPedido> AdicionarItemPedidoAsync(ItemPedido entity)
         {
-            await _context.ItemsPedidos.AddAsync(entity);
+            await _context.ItensPedido.AddAsync(entity);
             return entity;
         }
         public async Task<ItemPedido> AtualizarItemPedidoAsync(ItemPedido entity)
         {
-            _context.ItemsPedidos.Update(entity);
+            _context.ItensPedido.Update(entity);
             return entity;
         }
         public async Task<ItemPedido> RemoverItemPedidoAsync(int id)
         {
-            var itemPedido = await _context.ItemsPedidos.FindAsync(id);
+            var itemPedido = await _context.ItensPedido.FindAsync(id);
             if (itemPedido != null)
             {
-                _context.ItemsPedidos.Remove(itemPedido);
+                _context.ItensPedido.Remove(itemPedido);
             }
             return itemPedido;
         }
         public async Task<List<ItemPedido>> ObterTodosItensPedidosAsync()
         {
-            return await _context.ItemsPedidos.ToListAsync();
+            return await _context.ItensPedido.ToListAsync();
         }
         public async Task<List<ItemPedido>> ObterItensPedidosPorPedidoIdAsync(int pedidoId)
         {
-            return await _context.ItemsPedidos
+            return await _context.ItensPedido
                 .Where(ip => ip.PedidoId == pedidoId)
                 .ToListAsync();
         }

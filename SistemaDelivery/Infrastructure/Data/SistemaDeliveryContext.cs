@@ -16,7 +16,7 @@ namespace SistemaDelivery.Infrastructure.Data
         public DbSet<Restaurante> Restaurantes => Set<Restaurante>();
         public DbSet<Prato> Pratos => Set<Prato>();
         public DbSet<Pedido> Pedidos => Set<Pedido>();
-        public DbSet<ItemPedido> ItemsPedidos => Set<ItemPedido>();
+        public DbSet<ItemPedido> ItensPedido => Set<ItemPedido>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -13,5 +13,6 @@ namespace SistemaDelivery.Modelo.Interfaces
         Task<Restaurante> AtualizarRestauranteAsync(Restaurante restaurante);
         Task<Restaurante> RemoverRestauranteAsync(int id);
         Task<List<Restaurante>> ObterTodosRestauranteAsync();
+        
     }
 }
