@@ -7,10 +7,10 @@ namespace SistemaDelivery.Modelo.Interfaces
 {
     public interface IPedidoRepositorio
     {
-        Task<Pedido> ObterPorIdAsync(int id);
+        Task<Pedido?> ObterPorIdAsync(int id);
         Task<Pedido> AdicionarPedidoAsync(Pedido pedido);
         Task<Pedido> AtualizarPedidoAsync(Pedido pedido);
-        Task<Pedido> RemoverPedidoAsync(int id);
+        Task<Pedido?> RemoverPedidoAsync(int id);
         Task<List<Pedido>> ObterTodosPedidosAsync();
     }
 }

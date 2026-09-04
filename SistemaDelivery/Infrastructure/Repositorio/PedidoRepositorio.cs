@@ -14,7 +14,7 @@ namespace SistemaDelivery.Infrastructure.Repositorio
             _context = context;
         }
 
-        public async Task<Pedido> ObterPorIdAsync(int id)
+        public async Task<Pedido?> ObterPorIdAsync(int id)
         {
             return await _context.Pedidos.FindAsync(id);
         }
@@ -31,7 +31,7 @@ namespace SistemaDelivery.Infrastructure.Repositorio
             return entity;
         }
 
-        public async Task<Pedido> RemoverPedidoAsync(int id)
+        public async Task<Pedido?> RemoverPedidoAsync(int id)
         {
             var pedido = await _context.Pedidos.FindAsync(id);
             if (pedido != null)

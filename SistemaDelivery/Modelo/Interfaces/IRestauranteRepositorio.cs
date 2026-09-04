@@ -8,10 +8,10 @@ namespace SistemaDelivery.Modelo.Interfaces
 {
     public interface IRestauranteRepositorio
     {
-        Task<Restaurante> ObterPorIdAsync(int id);
+        Task<Restaurante?> ObterPorIdAsync(int id);
         Task<Restaurante> AdicionarRestauranteAsync(Restaurante restaurante);
         Task<Restaurante> AtualizarRestauranteAsync(Restaurante restaurante);
-        Task<Restaurante> RemoverRestauranteAsync(int id);
+        Task<Restaurante?> RemoverRestauranteAsync(int id);
         Task<List<Restaurante>> ObterTodosRestauranteAsync();
         
     }

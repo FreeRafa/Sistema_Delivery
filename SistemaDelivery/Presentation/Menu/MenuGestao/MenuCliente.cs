@@ -64,16 +64,16 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
         private async Task AdicionarClienteAsync()
         {
             Console.Write("Digite o nome do cliente: ");
-            var nome = Console.ReadLine();
+            var nome = Console.ReadLine() ?? string.Empty; 
 
             Console.Write("Digite o NIF do cliente: ");
-            var nif = Console.ReadLine();
-            
+            var nif = Console.ReadLine() ?? string.Empty;
+
             Console.Write("Digite o número de telemóvel: ");
-            var telemovel = Console.ReadLine();
+            var telemovel = Console.ReadLine() ?? string.Empty;
 
             Console.Write("Digite o email do cliente: ");
-            var email = Console.ReadLine();
+            var email = Console.ReadLine() ?? string.Empty;
 
             var cliente = new Cliente { Nome = nome, Nif = nif, Telemovel = telemovel, Email = email };
             try
@@ -85,7 +85,84 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             {
                 Console.WriteLine($"Erro ao adicionar cliente: {ex.Message}");
             }
+        }
 
+        private async Task AtualizarClienteAsync()
+        {
+            Console.Write("Digite o ID do cliente a atualizar: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                var clienteExistente = await _clienteServico.ObterPorIdAsync(id);
+                if (clienteExistente != null)
+                {
+                    Console.Write("Digite o novo nome do cliente: ");
+                    clienteExistente.Nome = Console.ReadLine() ?? clienteExistente.Nome;
+
+                    Console.Write("Digite o novo NIF do cliente: ");
+                    clienteExistente.Nif = Console.ReadLine() ?? clienteExistente.Nif;
+
+                    Console.Write("Digite o novo número de telemóvel: ");
+                    clienteExistente.Telemovel = Console.ReadLine() ?? clienteExistente.Telemovel;
+
+                    Console.Write("Digite o novo email do cliente: ");
+                    clienteExistente.Email = Console.ReadLine() ?? clienteExistente.Email;
+                    try
+                    {
+                        await _clienteServico.AtualizarClienteAsync(clienteExistente);
+                        Console.WriteLine("Cliente atualizado com sucesso!");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Erro ao atualizar cliente: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Cliente não encontrado.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("ID inválido.");
+            }
+        }
+
+        private async Task RemoverClienteAsync()
+        {
+            Console.Write("Digite o ID do cliente a remover: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                try
+                {
+                    await _clienteServico.RemoverClienteAsync(id);
+                    Console.WriteLine("Cliente removido com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao remover cliente: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("ID inválido.");
+            }
+        }
+
+        private async Task ListarClientesAsync()
+        {
+            try
+            {
+                var clientes = await _clienteServico.ObterTodosClienteAsync();
+                Console.WriteLine("Lista de Clientes:");
+                foreach (var cliente in clientes)
+                {
+                    Console.WriteLine($"ID: {cliente.Id}, Nome: {cliente.Nome}, NIF: {cliente.Nif}, Telemóvel: {cliente.Telemovel}, Email: {cliente.Email}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao listar clientes: {ex.Message}");
+            }
         }
     }
 }
