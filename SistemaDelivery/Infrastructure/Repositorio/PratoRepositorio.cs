@@ -16,34 +16,41 @@ namespace SistemaDelivery.Infrastructure.Repositorio
 
         public async Task<Prato?> ObterPorIdAsync(int id)
         {
-            return await _context.Pratos.FindAsync(id);
+            return await _context.Prato.FindAsync(id);
         }
 
         public async Task<Prato> AdicionarPratoAsync(Prato entity)
         {
-            await _context.Pratos.AddAsync(entity);
+            await _context.Prato.AddAsync(entity);
             return entity;
         }
 
         public async Task<Prato> AtualizarPratoAsync(Prato entity)
         {
-            _context.Pratos.Update(entity);
+            _context.Prato.Update(entity);
             return entity;
         }
 
         public async Task<Prato?> RemoverPratoAsync(int id)
         {
-            var prato = await _context.Pratos.FindAsync(id);
+            var prato = await _context.Prato.FindAsync(id);
             if (prato != null)
             {
-                _context.Pratos.Remove(prato);
+                _context.Prato.Remove(prato);
             }
             return prato;
         }
 
         public async Task<List<Prato>> ObterTodosPratosAsync()
         {
-            return await _context.Pratos.ToListAsync();
+            return await _context.Prato.ToListAsync();
+        }
+
+        public async Task<List<Prato>> ObterPratosPorRestauranteAsync(int restauranteId)
+        {
+            return await _context.Prato
+                .Where(p => p.RestauranteId == restauranteId)
+                .ToListAsync();
         }
     }
 }

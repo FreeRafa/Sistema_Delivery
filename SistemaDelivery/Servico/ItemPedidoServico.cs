@@ -6,11 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace SistemaDelivery.Servico
 {
-    public class ItemPedidoService
+    public class ItemPedidoServico
     {
         private readonly IItemPedidoRepositorio _itemPedidoRepositorio;
 
-        public ItemPedidoService(IItemPedidoRepositorio itemPedidoRepositorio)
+        public ItemPedidoServico(IItemPedidoRepositorio itemPedidoRepositorio)
         {
             _itemPedidoRepositorio = itemPedidoRepositorio;
         }

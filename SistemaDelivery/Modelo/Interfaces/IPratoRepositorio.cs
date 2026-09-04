@@ -12,5 +12,6 @@ namespace SistemaDelivery.Modelo.Interfaces
         Task<Prato> AtualizarPratoAsync(Prato prato);
         Task<Prato?> RemoverPratoAsync(int id);
         Task<List<Prato>> ObterTodosPratosAsync();
+        Task<List<Prato>> ObterPratosPorRestauranteAsync(int restauranteId);
     }
 }

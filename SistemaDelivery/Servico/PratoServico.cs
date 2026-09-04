@@ -49,5 +49,10 @@ namespace SistemaDelivery.Servico
                 throw new KeyNotFoundException($"Prato com id {id} não encontrado.");
             return await _pratoRepositorio.RemoverPratoAsync(id);
         }
+
+        public async Task<List<Prato>> ObterPratosPorRestauranteAsync(int restauranteId)
+        {
+            return await _pratoRepositorio.ObterPratosPorRestauranteAsync(restauranteId);
+        }
     }
 }

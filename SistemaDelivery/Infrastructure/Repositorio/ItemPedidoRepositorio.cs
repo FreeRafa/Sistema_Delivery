@@ -20,20 +20,25 @@ namespace SistemaDelivery.Infrastructure.Repositorio
         public async Task<ItemPedido> AdicionarItemPedidoAsync(ItemPedido entity)
         {
             await _context.ItensPedido.AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
         public async Task<ItemPedido> AtualizarItemPedidoAsync(ItemPedido entity)
         {
             _context.ItensPedido.Update(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
         public async Task<ItemPedido?> RemoverItemPedidoAsync(int id)
         {
             var itemPedido = await _context.ItensPedido.FindAsync(id);
+
             if (itemPedido != null)
             {
                 _context.ItensPedido.Remove(itemPedido);
+                await _context.SaveChangesAsync();
             }
+
             return itemPedido;
         }
         public async Task<List<ItemPedido>> ObterTodosItensPedidosAsync()

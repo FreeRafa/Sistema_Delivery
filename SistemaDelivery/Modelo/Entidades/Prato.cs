@@ -12,7 +12,7 @@ namespace SistemaDelivery.Modelo.Entidades
         public bool Disponivel { get; set; }
 
         public int RestauranteId { get; set; }
-        public required Restaurante Restaurante { get; set; } 
+        public  Restaurante Restaurante { get; set; } 
 
         
     }

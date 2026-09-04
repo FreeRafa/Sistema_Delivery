@@ -12,15 +12,18 @@ namespace SistemaDelivery.Infrastructure.Data
         {
         }
 
-        public DbSet<Cliente> Clientes => Set<Cliente>();
-        public DbSet<Restaurante> Restaurantes => Set<Restaurante>();
-        public DbSet<Prato> Pratos => Set<Prato>();
-        public DbSet<Pedido> Pedidos => Set<Pedido>();
+        public DbSet<Cliente> Cliente => Set<Cliente>();
+        public DbSet<Restaurante> Restaurante => Set<Restaurante>();
+        public DbSet<Prato> Prato => Set<Prato>();
+        public DbSet<Pedido> Pedido => Set<Pedido>();
         public DbSet<ItemPedido> ItensPedido => Set<ItemPedido>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SistemaDeliveryContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(SistemaDeliveryContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

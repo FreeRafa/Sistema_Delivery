@@ -16,34 +16,39 @@ namespace SistemaDelivery.Infrastructure.Repositorio
 
         public async Task<Cliente?> ObterPorIdAsync(int id)
         {
-             return await _context.Clientes.FindAsync(id);
+             return await _context.Cliente.FindAsync(id);
         }
 
         public async Task<Cliente> AdicionarClienteAsync(Cliente entity)
         {
-            await _context.Clientes.AddAsync(entity);
+            await _context.Cliente.AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task<Cliente> AtualizarClienteAsync(Cliente entity)
         {
-            _context.Clientes.Update(entity);
+            _context.Cliente.Update(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task<Cliente?> RemoverClienteAsync(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Cliente.FindAsync(id);
+
             if (cliente != null)
             {
-                _context.Clientes.Remove(cliente);
+                _context.Cliente.Remove(cliente);
+                await _context.SaveChangesAsync();
             }
+
             return cliente;
         }
 
         public async Task<List<Cliente>> ObterTodosClienteAsync()
         {
-            return await _context.Clientes.ToListAsync();
+            return await _context.Cliente.ToListAsync();
         }
     }
 }
