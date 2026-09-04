@@ -16,7 +16,7 @@ namespace SistemaDelivery.Servico
             _clienteRepositorio = clienteRepositorio;
         }
 
-        public async Task<Cliente> ObterPorIdAsync(int id)
+        public async Task<Cliente?> ObterPorIdAsync(int id)
         {
             var cliente = await _clienteRepositorio.ObterPorIdAsync(id);
 
@@ -50,7 +50,7 @@ namespace SistemaDelivery.Servico
             return await _clienteRepositorio.AtualizarClienteAsync(cliente);
         }
 
-        public async Task<Cliente> RemoverClienteAsync(int id)
+        public async Task<Cliente?> RemoverClienteAsync(int id)
         {
             var existente = await _clienteRepositorio.ObterPorIdAsync(id);
 

@@ -46,7 +46,7 @@ namespace SistemaDelivery.Servico
 
         }
 
-        public async Task<Restaurante> RemoverRestauranteAsync(int id)
+        public async Task<Restaurante?> RemoverRestauranteAsync(int id)
         {
             var existente = await _restauranteRepositorio.ObterPorIdAsync(id);
 

@@ -23,6 +23,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
 
             while (continuar)
             {
+                Console.Clear();
                 Console.WriteLine("Menu Cliente");
                 Console.WriteLine("1. Adicionar um cliente");
                 Console.WriteLine("2. Atualizar cliente");

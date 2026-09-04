@@ -42,7 +42,7 @@ namespace SistemaDelivery.Servico
             return await _pratoRepositorio.AtualizarPratoAsync(prato);
         }
 
-        public async Task<Prato> RemoverPratoAsync(int id)
+        public async Task<Prato?> RemoverPratoAsync(int id)
         {
             var existente = await _pratoRepositorio.ObterPorIdAsync(id);
             if (existente == null)

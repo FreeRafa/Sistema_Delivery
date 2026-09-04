@@ -41,7 +41,7 @@ namespace SistemaDelivery.Servico
             return await _itemPedidoRepositorio.AtualizarItemPedidoAsync(itemPedido);
         }
 
-        public async Task<ItemPedido> RemoverItemPedidoAsync(int id)
+        public async Task<ItemPedido?> RemoverItemPedidoAsync(int id)
         {
             var existente = await _itemPedidoRepositorio.ObterPorIdAsync(id);
             if (existente == null)
