@@ -10,10 +10,11 @@ namespace SistemaDelivery.Servico
     public class PedidoServico
     {
         private readonly IPedidoRepositorio _pedidoRepositorio;
-
+        
         public PedidoServico(IPedidoRepositorio pedidoRepositorio)
         {
             _pedidoRepositorio = pedidoRepositorio;
+
         }
 
         public async Task<Pedido> ObterPorIdAsync(int id)
@@ -48,5 +49,6 @@ namespace SistemaDelivery.Servico
                 throw new KeyNotFoundException($"Pedido com id {id} não encontrado.");
             return await _pedidoRepositorio.RemoverPedidoAsync(id);
         }
+
     }
 }

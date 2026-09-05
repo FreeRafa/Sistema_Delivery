@@ -25,7 +25,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             Console.WriteLine("2. Atualizar Restaurante");
             Console.WriteLine("3. Remover Restaurante");
             Console.WriteLine("4. Listar Restaurantes");
-            Console.WriteLine("5. Voltar ao Menu Principal");
+            Console.WriteLine("0. Voltar ao Menu Principal");
             Console.Write("Escolha uma opção: ");
             var opcao = Console.ReadLine();
             switch (opcao)
@@ -46,7 +46,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                     await ListarRestaurantesAsync();
                     break;
 
-                case "5":
+                case "0":
                     return; // Voltar ao menu principal
                 default:
                     Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");

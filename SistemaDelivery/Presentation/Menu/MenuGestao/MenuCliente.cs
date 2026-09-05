@@ -29,7 +29,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                 Console.WriteLine("2. Atualizar cliente");
                 Console.WriteLine("3. Remover cliente");
                 Console.WriteLine("4. Listar todos os clientes");
-                Console.WriteLine("5. Voltar ao Menu Principal");
+                Console.WriteLine("0. Voltar ao Menu Principal");
                 Console.Write("Escolha uma opção: ");
 
                 var opcao = Console.ReadLine();
@@ -51,7 +51,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                         await ListarClientesAsync();
                         break;
 
-                    case "5":
+                    case "0":
                         continuar = false;
                         break;
                     default:

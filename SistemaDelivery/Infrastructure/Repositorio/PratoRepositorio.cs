@@ -22,12 +22,14 @@ namespace SistemaDelivery.Infrastructure.Repositorio
         public async Task<Prato> AdicionarPratoAsync(Prato entity)
         {
             await _context.Prato.AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task<Prato> AtualizarPratoAsync(Prato entity)
         {
             _context.Prato.Update(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
@@ -37,6 +39,7 @@ namespace SistemaDelivery.Infrastructure.Repositorio
             if (prato != null)
             {
                 _context.Prato.Remove(prato);
+                await _context.SaveChangesAsync();
             }
             return prato;
         }
@@ -50,6 +53,15 @@ namespace SistemaDelivery.Infrastructure.Repositorio
         {
             return await _context.Prato
                 .Where(p => p.RestauranteId == restauranteId)
+                .Include(p => p.Restaurante)
+                .ToListAsync();
+        }
+
+        public async Task<List<Prato>> ObterPratosDisponiveisPorRestauranteAsync(int restauranteId)
+        {
+            return await _context.Prato
+                .Where(p => p.RestauranteId == restauranteId && p.Disponivel)
+                .Include(p => p.Restaurante)
                 .ToListAsync();
         }
     }

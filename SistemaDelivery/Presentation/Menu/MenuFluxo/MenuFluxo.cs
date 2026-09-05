@@ -27,7 +27,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                 Console.WriteLine("1. Gerir Clientes");
                 Console.WriteLine("2. Gerir Restaurantes");
                 Console.WriteLine("3. Gerir Pratos");
-                Console.WriteLine("4. Sair");
+                Console.WriteLine("0. Sair");
                 Console.Write("Escolha uma opção: ");
 
                 var opcao = Console.ReadLine();
@@ -45,7 +45,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                         await _menuPrato.ExibirMenuPratoAsync();
                         break;
 
-                    case "4":
+                    case "0":
                         continuar = false;
                         break;
 

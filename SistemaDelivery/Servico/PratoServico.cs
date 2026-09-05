@@ -54,5 +54,10 @@ namespace SistemaDelivery.Servico
         {
             return await _pratoRepositorio.ObterPratosPorRestauranteAsync(restauranteId);
         }
+
+        public async Task<List<Prato>> ObterPratosDisponiveisPorRestauranteAsync(int restauranteId)
+        {
+            return await _pratoRepositorio.ObterPratosDisponiveisPorRestauranteAsync(restauranteId);
+        }
     }
 }

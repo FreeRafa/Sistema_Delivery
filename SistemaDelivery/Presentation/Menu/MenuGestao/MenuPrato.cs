@@ -5,16 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace SistemaDelivery.Presentation.Menu.MenuGestao
 {
     public class MenuPrato
     {
         private readonly PratoServico _pratoServico;
+        private readonly RestauranteServico _restauranteServico;
 
-        public MenuPrato(PratoServico pratoServico)
+        public MenuPrato(PratoServico pratoServico, RestauranteServico restauranteServico)
         {
             _pratoServico = pratoServico;
+            _restauranteServico = restauranteServico;
         }
 
         public async Task ExibirMenuPratoAsync()
@@ -25,7 +28,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             Console.WriteLine("2. Atualizar Prato");
             Console.WriteLine("3. Remover Prato");
             Console.WriteLine("4. Listar Pratos");
-            Console.WriteLine("5. Voltar ao Menu Principal");
+            Console.WriteLine("0. Voltar ao Menu Principal");
             Console.Write("Escolha uma opção: ");
             var opcao = Console.ReadLine();
             switch (opcao)
@@ -42,7 +45,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                 case "4":
                     await ListarPratosAsync();
                     break;
-                case "5":
+                case "0":
                     return; // Voltar ao menu principal
                 default:
                     Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar...");
@@ -57,28 +60,64 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             Console.Clear();
             Console.WriteLine("=== Adicionar Prato ===");
 
-            Console.Write("Nome do Prato: ");
-            var nome = Console.ReadLine() ?? string.Empty;
-
-            Console.Write("Preço: ");
-            decimal.TryParse(Console.ReadLine(), out decimal preco);
-
-            Console.Write("Id do Restaurante: ");
-            int.TryParse(Console.ReadLine(), out int restauranteId);
-
-            Console.Write("Disponível? (s/n): ");
-            var disponivel = Console.ReadLine()?.Trim().ToLower() == "s";
-
-            var prato = new Prato
-            {
-                Nome = nome,
-                Preco = preco,
-                RestauranteId = restauranteId,
-                Disponivel = disponivel
-            };
-
             try
             {
+                var restaurantes = await _restauranteServico.ObterTodosRestaurantesAsync();
+
+                if (restaurantes.Count == 0)
+                {
+                    Console.WriteLine("Não existem restaurantes registados.");
+                    Console.WriteLine("Registe um restaurante antes de adicionar um prato.");
+                    Console.ReadKey(true);
+                    return;
+                }
+
+                Console.WriteLine("\n=== Restaurantes disponíveis ===");
+
+                foreach (var restaurante in restaurantes)
+                {
+                    Console.WriteLine(
+                        $"ID: {restaurante.Id} | " +
+                        $"Nome: {restaurante.Nome} | " +
+                        $"Categoria: {restaurante.Categoria}");
+                }
+
+                Console.Write("\nNome do prato: ");
+                var nome = Console.ReadLine() ?? string.Empty;
+
+                Console.Write("Preço: ");
+                var textoPreco = Console.ReadLine();
+
+                if (!decimal.TryParse(
+                        textoPreco,
+                        NumberStyles.Number,
+                        CultureInfo.InvariantCulture,
+                        out decimal preco))
+                {
+                    Console.WriteLine("Preço inválido. Exemplo válido: 7.50");
+                    Console.ReadKey(true);
+                    return;
+                }
+
+                Console.Write("ID do restaurante: ");
+                if (!int.TryParse(Console.ReadLine(), out int restauranteId))
+                {
+                    Console.WriteLine("ID do restaurante inválido.");
+                    Console.ReadKey(true);
+                    return;
+                }
+
+                Console.Write("Disponível? (s/n): ");
+                var disponivel = Console.ReadLine()?.Trim().ToLower() == "s";
+
+                var prato = new Prato
+                {
+                    Nome = nome,
+                    Preco = preco,
+                    RestauranteId = restauranteId,
+                    Disponivel = disponivel
+                };
+
                 await _pratoServico.AdicionarPratoAsync(prato);
                 Console.WriteLine("Prato adicionado com sucesso!");
             }
@@ -86,8 +125,9 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             {
                 Console.WriteLine($"Erro ao adicionar prato: {ex.Message}");
             }
-            Console.WriteLine("Pressione qualquer tecla para continuar...");
-            Console.ReadKey();
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey(true);
         }
 
         private async Task AtualizarPratoAsync()
@@ -165,7 +205,11 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             {
                 foreach (var prato in pratos)
                 {
-                    Console.WriteLine($"Id: {prato.Id}, Nome: {prato.Nome}, Preço: {prato.Preco}, RestauranteId: {prato.RestauranteId}, Disponível: {prato.Disponivel}");
+                    Console.WriteLine($"Id: {prato.Id}, " +
+                        $"Nome: {prato.Nome}, " +
+                        $"Preço: {prato.Preco}, " +
+                        $"Restaurante Nome: {prato.Restaurante?.Nome}, " +
+                        $"Disponível: {prato.Disponivel}");
                 }
             }
             Console.WriteLine("Pressione qualquer tecla para continuar...");
