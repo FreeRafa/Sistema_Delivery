@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDelivery.Presentation.Menu.MenuFluxo;
+using System;
 using System.Threading.Tasks;
 
 namespace SistemaDelivery.Presentation.Menu.MenuGestao
@@ -8,12 +9,18 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
         private readonly MenuCliente _menuCliente;
         private readonly MenuRestaurante _menuRestaurante;
         private readonly MenuPrato _menuPrato;
+        private readonly MenuCompra _menuCompra;
 
-        public MenuFluxo(MenuCliente menuCliente, MenuRestaurante menuRestaurante, MenuPrato menuPrato)
+        public MenuFluxo(
+            MenuCliente menuCliente,
+            MenuRestaurante menuRestaurante,
+            MenuPrato menuPrato,
+            MenuCompra menuCompra)
         {
             _menuCliente = menuCliente;
             _menuRestaurante = menuRestaurante;
             _menuPrato = menuPrato;
+            _menuCompra = menuCompra;
         }
 
         public async Task ExibirMenuFluxoAsync()
@@ -27,6 +34,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                 Console.WriteLine("1. Gerir Clientes");
                 Console.WriteLine("2. Gerir Restaurantes");
                 Console.WriteLine("3. Gerir Pratos");
+                Console.WriteLine("4. Fazer Pedido");
                 Console.WriteLine("0. Sair");
                 Console.Write("Escolha uma opção: ");
 
@@ -43,6 +51,10 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
 
                     case "3":
                         await _menuPrato.ExibirMenuPratoAsync();
+                        break;
+
+                    case "4":
+                        await _menuCompra.ExibirMenuCompraAsync();
                         break;
 
                     case "0":

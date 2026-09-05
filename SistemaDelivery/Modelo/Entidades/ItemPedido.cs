@@ -11,9 +11,9 @@ namespace SistemaDelivery.Modelo.Entidades
         public decimal PrecoUnitario { get; set; }
 
         public int PedidoId { get; set; } 
-        public required Pedido Pedido { get; set; } 
+        public  Pedido? Pedido { get; set; } 
 
         public int PratoId { get; set; }
-        public required Prato Prato { get; set; }
+        public  Prato? Prato { get; set; }
     }
 }

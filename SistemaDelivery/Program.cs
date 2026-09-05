@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SistemaDelivery.Infrastructure.Data;
 using SistemaDelivery.Infrastructure.Repositorio;
 using SistemaDelivery.Modelo.Interfaces;
+using SistemaDelivery.Presentation.Menu.MenuFluxo;
 using SistemaDelivery.Presentation.Menu.MenuGestao;
 using SistemaDelivery.Servico;
 
@@ -38,6 +39,7 @@ services.AddScoped<RestauranteServico>();
 services.AddScoped<MenuCliente>();
 services.AddScoped<MenuRestaurante>();
 services.AddScoped<MenuPrato>();
+services.AddScoped<MenuCompra>();
 services.AddScoped<MenuFluxo>();
 
 
