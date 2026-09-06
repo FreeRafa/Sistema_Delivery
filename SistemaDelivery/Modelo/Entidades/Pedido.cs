@@ -13,10 +13,10 @@ namespace SistemaDelivery.Modelo.Entidades
         public decimal Total { get; set; }
 
         public int RestauranteId { get; set; }
-        public  Restaurante Restaurante { get; set; }
+        public  Restaurante Restaurante { get; set; } = null!;
 
         public int ClienteId { get; set; }
-        public  Cliente Cliente { get; set; }
+        public Cliente Cliente { get; set; } = null!;
 
         public ICollection<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
     }

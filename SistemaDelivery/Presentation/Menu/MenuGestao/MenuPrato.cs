@@ -133,7 +133,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
         private async Task AtualizarPratoAsync()
         {
             Console.Clear();
-            Console.WriteLine("=== Atualizar Pratos ===");
+            Console.WriteLine("=== Atualizar Prato ===");
 
             var pratos = await _pratoServico.ObterTodosPratosAsync();
 
@@ -141,7 +141,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             {
                 Console.WriteLine("Não existem pratos cadastrados.");
                 Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
 
@@ -155,7 +155,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             if (!int.TryParse(Console.ReadLine(), out int id))
             {
                 Console.WriteLine("Id inválido. Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
 
@@ -168,9 +168,66 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
+
+            Console.Write($"Nome ({prato.Nome}): ");
+            var nome = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(nome))
+                prato.Nome = nome;
+
+            Console.Write($"Preço ({prato.Preco}) — deixe em branco para manter: ");
+            var textoPreco = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(textoPreco))
+            {
+                if (decimal.TryParse(
+                        textoPreco,
+                        NumberStyles.Number,
+                        CultureInfo.InvariantCulture,
+                        out decimal preco))
+                {
+                    prato.Preco = preco;
+                }
+                else
+                {
+                    Console.WriteLine("Preço inválido, mantendo o valor anterior.");
+                }
+            }
+
+            Console.Write($"ID do restaurante ({prato.RestauranteId}) — deixe em branco para manter: ");
+            var textoRestauranteId = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(textoRestauranteId))
+            {
+                if (int.TryParse(textoRestauranteId, out int restauranteId))
+                {
+                    prato.RestauranteId = restauranteId;
+                }
+                else
+                {
+                    Console.WriteLine("ID do restaurante inválido, mantendo o valor anterior.");
+                }
+            }
+
+            Console.Write($"Disponível? ({(prato.Disponivel ? "s" : "n")}) — deixe em branco para manter: ");
+            var textoDisponivel = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(textoDisponivel))
+            {
+                prato.Disponivel = textoDisponivel.Trim().ToLower() == "s";
+            }
+
+            try
+            {
+                await _pratoServico.AtualizarPratoAsync(prato);
+                Console.WriteLine("Prato atualizado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao atualizar prato: {ex.Message}");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey(true);
         }
 
         private async Task RemoverPratoAsync()

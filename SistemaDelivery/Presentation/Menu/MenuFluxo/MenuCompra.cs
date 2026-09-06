@@ -74,7 +74,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuFluxo
             }
         }
 
-        private async Task<Cliente> EscolherClienteAsync()
+        private async Task<Cliente?> EscolherClienteAsync()
         {
             Console.Clear();
             Console.WriteLine("=== Identificação do Cliente ===");
@@ -109,7 +109,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuFluxo
             }
         }
 
-        private async Task<Restaurante> EscolherRestauranteAsync()
+        private async Task<Restaurante?> EscolherRestauranteAsync()
         {
             Console.Clear();
             Console.WriteLine("=== Escolha o Restaurante ===");

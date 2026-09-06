@@ -102,15 +102,14 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
         private async Task AtualizarClienteAsync()
         {
             Console.Clear();
-            Console.WriteLine("=== Atualizar Restaurante ===");
+            Console.WriteLine("=== Atualizar Cliente ===");
 
             var clientes = await _clienteServico.ObterTodosClienteAsync();
 
             if (clientes.Count == 0)
             {
                 Console.WriteLine("Não existem clientes cadastrados.");
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
+                AguardarContinuacao();
                 return;
             }
 
@@ -123,15 +122,15 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             Console.Write("\nDigite o Id do Cliente a atualizar: ");
             if (!int.TryParse(Console.ReadLine(), out int id))
             {
-                Console.WriteLine("Id inválido. Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
+                Console.WriteLine("Id inválido.");
+                AguardarContinuacao();
                 return;
             }
 
             Cliente cliente;
             try
             {
-                cliente = await _clienteServico.ObterPorIdAsync(id);
+                cliente = (await _clienteServico.ObterPorIdAsync(id))!;
             }
             catch (KeyNotFoundException ex)
             {
@@ -140,6 +139,38 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
                 Console.ReadKey();
                 return;
             }
+
+            Console.Write($"Nome ({cliente.Nome}): ");
+            var nome = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(nome))
+                cliente.Nome = nome;
+
+            Console.Write($"NIF ({cliente.Nif}): ");
+            var nif = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(nif))
+                cliente.Nif = nif;
+
+            Console.Write($"Telemóvel ({cliente.Telemovel}): ");
+            var telemovel = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(telemovel))
+                cliente.Telemovel = telemovel;
+
+            Console.Write($"Email ({cliente.Email}): ");
+            var email = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(email))
+                cliente.Email = email;
+
+            try
+            {
+                await _clienteServico.AtualizarClienteAsync(cliente);
+                Console.WriteLine("Cliente atualizado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao atualizar cliente: {ex.Message}");
+            }
+
+            AguardarContinuacao();
         }
 
         private async Task RemoverClienteAsync()

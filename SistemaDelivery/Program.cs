@@ -6,6 +6,7 @@ using SistemaDelivery.Infrastructure.Repositorio;
 using SistemaDelivery.Modelo.Interfaces;
 using SistemaDelivery.Presentation.Menu.MenuFluxo;
 using SistemaDelivery.Presentation.Menu.MenuGestao;
+using SistemaDelivery.Presentation.Menu;
 using SistemaDelivery.Servico;
 
 
@@ -40,7 +41,7 @@ services.AddScoped<MenuCliente>();
 services.AddScoped<MenuRestaurante>();
 services.AddScoped<MenuPrato>();
 services.AddScoped<MenuCompra>();
-services.AddScoped<MenuFluxo>();
+services.AddScoped<MenuPrincipal>();
 
 
 using var serviceProvider = services.BuildServiceProvider();
@@ -49,8 +50,8 @@ using var scope = serviceProvider.CreateScope();
 
 try
 {
-    var menuFluxo = scope.ServiceProvider.GetRequiredService<MenuFluxo>();
-    await menuFluxo.ExibirMenuFluxoAsync();
+    var menuPrincipal = scope.ServiceProvider.GetRequiredService<MenuPrincipal>();
+    await menuPrincipal.ExibirMenuPrincipalAsync();
 }
 catch (Exception ex)
 {

@@ -1,17 +1,18 @@
-﻿using SistemaDelivery.Presentation.Menu.MenuFluxo;
+﻿using SistemaDelivery.Presentation.Menu.MenuGestao;
+using SistemaDelivery.Presentation.Menu.MenuFluxo;
 using System;
 using System.Threading.Tasks;
 
-namespace SistemaDelivery.Presentation.Menu.MenuGestao
+namespace SistemaDelivery.Presentation.Menu
 {
-    public class MenuFluxo
+    public class MenuPrincipal
     {
         private readonly MenuCliente _menuCliente;
         private readonly MenuRestaurante _menuRestaurante;
         private readonly MenuPrato _menuPrato;
         private readonly MenuCompra _menuCompra;
 
-        public MenuFluxo(
+        public MenuPrincipal(
             MenuCliente menuCliente,
             MenuRestaurante menuRestaurante,
             MenuPrato menuPrato,
@@ -23,7 +24,7 @@ namespace SistemaDelivery.Presentation.Menu.MenuGestao
             _menuCompra = menuCompra;
         }
 
-        public async Task ExibirMenuFluxoAsync()
+        public async Task ExibirMenuPrincipalAsync()
         {
             bool continuar = true;
 
