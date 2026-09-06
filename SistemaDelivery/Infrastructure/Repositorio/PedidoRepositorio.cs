@@ -16,7 +16,12 @@ namespace SistemaDelivery.Infrastructure.Repositorio
 
         public async Task<Pedido?> ObterPorIdAsync(int id)
         {
-            return await _context.Pedido.FindAsync(id);
+            return await _context.Pedido
+                .Include(p => p.Cliente)
+                .Include(p => p.Restaurante)
+                .Include(p => p.Itens)
+                    .ThenInclude(i => i.Prato)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Pedido> AdicionarPedidoAsync(Pedido entity)
@@ -48,7 +53,12 @@ namespace SistemaDelivery.Infrastructure.Repositorio
 
         public async Task<List<Pedido>> ObterTodosPedidosAsync()
         {
-            return await _context.Pedido.ToListAsync();
+            return await _context.Pedido
+                .Include(p => p.Cliente)
+                .Include(p => p.Restaurante)
+                .Include(p => p.Itens)
+                    .ThenInclude(i => i.Prato)
+                .ToListAsync();
         }
     }
 }
